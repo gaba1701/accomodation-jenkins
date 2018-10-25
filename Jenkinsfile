@@ -1,17 +1,24 @@
 pipeline {
     agent any
-    stages {
-      stage('Hello world'){
-        steps{
-        sh 'echo hello world!'
-       }
-    }
-    
-     stage('Hello world2'){
-        steps{
-         sh 'echo hello world2!'
-        }
-        }
+   stages {
+      stage('Checkout'){
+                           steps{
+                                                  checkout scm
+                                 }
+                            }
+       
+       //building the web-app
+   stage('Build web-service'){
+                steps{
+                                        sh 'mvn -f /home/robot/workspace/accomodation-jenkins/hoteljsf clean install'
+                                   }
+                          }
+        //building the web-service
+         stage('Build web-service'){
+                steps{
+                                        sh 'mvn -f /home/robot/workspace/accomodation-jenkins clean install'
+                                   }
+                          }
     
     }
 }
